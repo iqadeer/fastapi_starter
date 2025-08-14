@@ -1,11 +1,17 @@
 # database.py
-from typing import AsyncGenerator, Any, Mapping
+from contextlib import asynccontextmanager
+from typing import AsyncGenerator
 from pymongo import AsyncMongoClient
-from pymongo.asynchronous.database import AsyncDatabase
+from fastapi import FastAPI
 
-async def get_db() -> AsyncGenerator[AsyncDatabase[Mapping[str, Any] | Any], None]:
+client: AsyncMongoClient | None = None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global client
     client = AsyncMongoClient("mongodb://localhost:27017/")
-    try:
-        yield client["mydatabase"]
-    finally:
-        await client.close()
+    yield
+    await client.close()
+
+async def get_db() -> AsyncGenerator:
+    yield client["mydatabase"]
