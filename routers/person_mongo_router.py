@@ -1,7 +1,8 @@
-from fastapi import APIRouter, HTTPException, status, Response, Request
+from fastapi import APIRouter, HTTPException, status, Request
 from bson import ObjectId
-from person_schema_mongo import PersonMongo
-from db import person_collection
+
+from db.db import person_collection
+from schemas.person_schema_mongo import PersonMongo
 from fastapi.responses import JSONResponse
 router = APIRouter(prefix="/api/person_mongo", tags=["person_mongo_db"])
 
