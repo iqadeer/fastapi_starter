@@ -2,10 +2,10 @@ from fastapi import APIRouter, HTTPException, status, Request, Depends
 from bson import ObjectId
 from typing import Annotated
 
-from schemas.person_schema_mongo import PersonMongo
+from app.schemas.person_schema_mongo import PersonMongo
 from fastapi.responses import JSONResponse
 
-from services.person_service import PersonService, get_person_service
+from app.services.person_service import PersonService, get_person_service
 
 router = APIRouter(prefix="/api/person_mongo", tags=["person_mongo_db"])
 
@@ -63,5 +63,7 @@ async def delete_person_by_id(person_id: str, person_service: Annotated[PersonSe
 
     if deleted_count == 0:
         raise HTTPException(status_code=404, detail="Person not found")
+
+
     # not needed as default is already changed in @router
     # return Response(status_code=status.HTTP_204_NO_CONTENT)

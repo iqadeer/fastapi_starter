@@ -6,8 +6,8 @@ from fastapi import Depends
 from pymongo.asynchronous.collection import AsyncCollection
 from pymongo.asynchronous.database import AsyncDatabase
 
-from db.database import get_db  # Import your existing DB dependency
-from schemas.person_schema_mongo import PersonMongo
+from app.db.database import get_db  # Import your existing DB dependency
+from app.schemas.person_schema_mongo import PersonMongo
 
 
 class PersonService:

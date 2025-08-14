@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-from core.lifespan import lifespan
-from routers import person_inmemory
-from routers import person_mongo_router
+from app.core.lifespan import lifespan
+from app.routers import person_inmemory
+from app.routers import person_mongo_router
 
 app = FastAPI(lifespan=lifespan)
 

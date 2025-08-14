@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 
-from schemas.person_schema import Person
+from app.schemas.person_schema import Person
 
 person1 = Person(id=1, first_name="John", last_name="Smith", dob='2024-02-13', gender="Male", city="London", terms_accepted=True)
 person2 = Person(id=2, first_name="John", last_name="Smith1", dob='2024-02-13', gender="Male", city="London", terms_accepted=True)
