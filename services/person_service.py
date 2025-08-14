@@ -5,7 +5,7 @@ from bson import ObjectId
 from fastapi import Depends
 from pymongo.database import Database
 from pymongo.collection import Collection
-from db.db import get_db  # Import your existing DB dependency
+from db.database import get_db  # Import your existing DB dependency
 from schemas.person_schema_mongo import PersonMongo
 
 
