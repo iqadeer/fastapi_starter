@@ -1,20 +1,25 @@
 # database.py
-from contextlib import asynccontextmanager, contextmanager
-from typing import Generator
+from typing import AsyncGenerator, Any, Mapping
+from pymongo import AsyncMongoClient
+from pymongo.asynchronous.database import AsyncDatabase
+from pymongo.database import Database as PymongoDatabase
 
-from pymongo import MongoClient
-from pymongo.database import Database
+
+# def get_db() -> Generator[Database, None, None]:
+#     client = MongoClient("mongodb://localhost:27017/")
+#     try:
+#         yield  client["mydatabase"]
+#     finally:
+#         client.close()  # Ensure connection is closed
 
 
-def get_db() -> Generator[Database, None, None]:
-    client = MongoClient("mongodb://localhost:27017/")
+
+async def get_db() -> AsyncGenerator[AsyncDatabase[Mapping[str, Any] | Any], None]:
+    client = AsyncMongoClient("mongodb://localhost:27017/")
     try:
-        yield  client["mydatabase"]
+        yield client["mydatabase"]
     finally:
-        client.close()  # Ensure connection is closed
-
-
-
+        await client.close()
 
 # from pymongo import MongoClient
 #
