@@ -12,18 +12,42 @@ class PersonServiceInMemory:
         return self.person_db
 
     async def get_person_by_id(self, id_: int):
+        # index = None
+        # for i, p in enumerate(self.person_db):
+        #     if p.id == id_:
+        #         index = i
+        #         break
+        #
         return next((p for p in self.person_db if p.id == id_), None)
 
-    async def create_person(self, person: Person):
+    async def create_person(self, person: Person) -> int:
         person.id = next_person_id()
         self.person_db.append(person)
         return person.id
 
     async def update_person(self, id_: int, person: Person):
-        self.person_db[id_] = person
+        # index = None
+        # for i, p in enumerate(self.person_db):
+        #     if p.id == id_:
+        #         index = i
+        #         break
+        #
+
+        index = next((i for i, p in enumerate(self.person_db) if p.id == id_), None)
+        if index is not None:
+            self.person_db[index] = person
+
 
     async def delete_person(self, id_: int):
-        self.person_db.pop(id_)
+        # index = None
+        # for i, p in enumerate(self.person_db):
+        #     if p.id == id_:
+        #         index = i
+        #         break
+        #
+        index = next((i for i, p in enumerate(self.person_db) if p.id == id_), None)
+        if index is not None:
+            self.person_db.pop(index)
 
 
 def get_person_service_in_memory(db: Annotated[list[Person], Depends(get_in_memory_db)]) -> PersonServiceInMemory:
