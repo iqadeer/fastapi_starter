@@ -25,7 +25,7 @@ class PersonServiceInMemory:
         self.person_db.append(person)
         return person.id
 
-    async def update_person(self, id_: int, person: Person):
+    async def update_person(self, id_: int, person: Person) -> None:
         # index = None
         # for i, p in enumerate(self.person_db):
         #     if p.id == id_:
